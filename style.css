@@ -1,70 +1,205 @@
-body {
-  font-family: Arial, sans-serif;
-  background: #f4f6f9;
-  display: flex;
-  justify-content: center;
-  padding: 20px;
+/* General reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, sans-serif;
 }
 
+body {
+  background: linear-gradient(135deg, #d4fc79, #96e6a1);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Container */
 .container {
-  width: 600px;
   background: #fff;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-width: 500px;
 }
 
 h1 {
   text-align: center;
+  color: #333;
   margin-bottom: 20px;
 }
 
-form {
+/* Form */
+.task-form {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
-  margin-bottom: 20px;
+  justify-content: center;
 }
 
-form input, form select, form button {
-  padding: 8px;
-  border-radius: 6px;
+.task-form input,
+.task-form select,
+.task-form button {
+  padding: 10px 12px;
   border: 1px solid #ccc;
+  border-radius: 10px;
+  outline: none;
+  font-size: 14px;
 }
 
-form button {
-  background: #2563eb;
-  color: white;
+.task-form input:focus,
+.task-form select:focus {
+  border-color: #6c63ff;
+  box-shadow: 0 0 6px rgba(108, 99, 255, 0.3);
+}
+
+.task-form button {
+  background: #6c63ff;
+  color: #fff;
   cursor: pointer;
   border: none;
+  transition: background 0.3s ease;
 }
 
-.task-list {
-  margin-bottom: 20px;
+.task-form button:hover {
+  background: #5548c8;
 }
 
-.task {
+/* Task List */
+.task-lists {
+  margin-top: 20px;
+}
+
+.task-card {
+  background: #f9f9ff;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-bottom: 15px;
+  transition: transform 0.2s ease;
+}
+
+.task-card:hover {
+  transform: scale(1.02);
+}
+
+.task-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #f9fafb;
-  padding: 10px;
+}
+
+.task-title {
+  font-weight: bold;
+  color: #333;
+}
+
+.task-category {
+  font-size: 12px;
+  padding: 3px 8px;
   border-radius: 8px;
-  margin-bottom: 8px;
+  background: #e0e0ff;
+  color: #444;
 }
 
-.task.completed h3 {
+.task-deadline {
+  font-size: 12px;
+  color: #777;
+  margin-top: 6px;
+}
+
+/* Task List Headings */
+.task-list h2 {
+  margin: 15px 0;
+  color: #444;
+  font-size: 18px;
+  border-left: 4px solid #6c63ff;
+  padding-left: 8px;
+}
+
+/* Task Cards */
+.task-card {
+  background: #f9f9ff;
+  padding: 15px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+
+.task-card:hover {
+  transform: scale(1.02);
+}
+
+.task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+.task-category {
+  background: #e0e0ff;
+  color: #444;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 8px;
+}
+
+.task-deadline {
+  font-size: 13px;
+  color: #777;
+  margin-top: 8px;
+}
+
+/* Completed tasks */
+.task-card.completed .task-title {
   text-decoration: line-through;
-  color: gray;
+  color: #999;
 }
 
-.task-actions button {
-  margin-left: 5px;
-  padding: 5px 8px;
+/* Buttons */
+.task-actions {
+  margin-top: 12px;
+  display: flex;
+  gap: 10px;
+}
+
+.btn {
+  padding: 6px 12px;
+  border-radius: 8px;
   border: none;
-  border-radius: 4px;
   cursor: pointer;
+  font-size: 13px;
+  transition: all 0.2s ease;
 }
 
-.task-actions .done { background: #22c55e; color: white; }
-.task-actions .edit { background: #f59e0b; color: white; }
-.task-actions .delete { background: #ef4444; color: white; }
+.btn.done {
+  background: #4caf50;
+  color: white;
+}
+.btn.done:hover {
+  background: #3e8e41;
+}
+
+.btn.edit {
+  background: #ffca28;
+  color: #333;
+}
+.btn.edit:hover {
+  background: #e6b122;
+}
+
+.btn.delete {
+  background: #f44336;
+  color: white;
+}
+.btn.delete:hover {
+  background: #d32f2f;
+}
