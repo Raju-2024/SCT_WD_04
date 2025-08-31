@@ -23,32 +23,42 @@ function renderTasks() {
     tasks
       .filter(task => task.list === listName)
       .forEach(task => {
-        const taskDiv = document.createElement("div");
-        taskDiv.classList.add("task");
-        if (task.completed) taskDiv.classList.add("completed");
+        const taskCard = document.createElement("div");
+        taskCard.classList.add("task-card");
+        if (task.completed) taskCard.classList.add("completed");
 
-        const taskInfo = document.createElement("div");
-        const title = document.createElement("h3");
+        // Header (title + category tag)
+        const header = document.createElement("div");
+        header.classList.add("task-header");
+
+        const title = document.createElement("span");
+        title.classList.add("task-title");
         title.textContent = task.title;
-        taskInfo.appendChild(title);
 
+        const category = document.createElement("span");
+        category.classList.add("task-category");
+        category.textContent = task.list;
+
+        header.appendChild(title);
+        header.appendChild(category);
+        taskCard.appendChild(header);
+
+        // Deadline
         if (task.deadline) {
           const deadline = document.createElement("p");
+          deadline.classList.add("task-deadline");
           deadline.textContent = "⏰ " + new Date(task.deadline).toLocaleString();
-          deadline.style.fontSize = "12px";
-          deadline.style.color = "gray";
-          taskInfo.appendChild(deadline);
+          taskCard.appendChild(deadline);
         }
 
-        taskDiv.appendChild(taskInfo);
-
+        // Actions
         const actions = document.createElement("div");
         actions.classList.add("task-actions");
 
         // Done Button
         const doneBtn = document.createElement("button");
         doneBtn.textContent = task.completed ? "Undo" : "Done";
-        doneBtn.classList.add("done");
+        doneBtn.classList.add("btn", "done");
         doneBtn.onclick = () => {
           task.completed = !task.completed;
           renderTasks();
@@ -58,7 +68,7 @@ function renderTasks() {
         // Edit Button
         const editBtn = document.createElement("button");
         editBtn.textContent = "Edit";
-        editBtn.classList.add("edit");
+        editBtn.classList.add("btn", "edit");
         editBtn.onclick = () => {
           const newTitle = prompt("Edit task:", task.title);
           if (newTitle) task.title = newTitle;
@@ -71,15 +81,15 @@ function renderTasks() {
         // Delete Button
         const deleteBtn = document.createElement("button");
         deleteBtn.textContent = "Delete";
-        deleteBtn.classList.add("delete");
+        deleteBtn.classList.add("btn", "delete");
         deleteBtn.onclick = () => {
           tasks = tasks.filter(t => t.id !== task.id);
           renderTasks();
         };
         actions.appendChild(deleteBtn);
 
-        taskDiv.appendChild(actions);
-        listDiv.appendChild(taskDiv);
+        taskCard.appendChild(actions);
+        listDiv.appendChild(taskCard);
       });
 
     taskListsDiv.appendChild(listDiv);
